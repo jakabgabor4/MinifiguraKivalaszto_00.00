@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "~/DesktopModules/MVC/MinifiguraKivalaszto/Views/Shared/_Layout.cshtml";
+}
+
+<div id="figuraKeszitoModule_<%= ModuleId %>" class="figura-keszito-modul">
+    <div class="figura-keszito-container">
+        <div id="figuraKeszitoPanel_<%= ModuleId %>" class="panel-bal">
+            <h3 class="panel-bal-fo-cim">Figura előnézete</h3>
+
+            <div class="alkatresz-kategoria-szekcio" id="szekcioHajSapka_<%= ModuleId %>">
+                <img id="figuraKeszitoHajSapka_<%= ModuleId %>" src="/Portals/0/Images/testreszek/hair.jpg" alt="Haj/Sapka" class="figura-keszito-resz"/>
+            </div>
+
+            <div class="alkatresz-kategoria-szekcio" id="szekcioFej_<%= ModuleId %>">
+                <img id="figuraKeszitoFej_<%= ModuleId %>" src="/Portals/0/Images/testreszek/head.jpg" alt="Fej" class="figura-keszito-resz"/>
+            </div>
+
+            <div class="alkatresz-kategoria-szekcio" id="szekcioFelsoTest_<%= ModuleId %>">
+                <img id="figuraKeszitoFelsoTest_<%= ModuleId %>" src="/Portals/0/Images/testreszek/torso.jpg" alt="Felső Test" class="figura-keszito-resz"/>
+            </div>
+
+            <div class="alkatresz-kategoria-szekcio" id="szekcioLab_<%= ModuleId %>">
+                <img id="figuraKeszitoLab_<%= ModuleId %>" src="/Portals/0/Images/testreszek/legs.jpg" alt="Láb" class="figura-keszito-resz"/>
+            </div>
+
+        </div>
+
+        <div class="panel-jobb">
+
+            <div id="kategoriaValasztoGombok_<%= ModuleId %>" class="kategoria-gombok">
+                <button type="button" class="kategoria-gomb" data-kategoria="HajSapka">Haj/Sapka</button>
+                <button type="button" class="kategoria-gomb" data-kategoria="Fej">Fej</button>
+                <button type="button" class="kategoria-gomb" data-kategoria="FelsoTest">Felső Test</button>
+                <button type="button" class="kategoria-gomb" data-kategoria="Eszkoz">Eszköz</button>
+                <button type="button" class="kategoria-gomb" data-kategoria="Lab">Láb</button>
+            </div>
+
+            <div id="figuraElonezet_<%= ModuleId %>" class="figura-elonezet">
+                <img id="elonezetLab_<%= ModuleId %>" src="/Portals/0/Images/testreszek/legs.jpg" alt="Láb" class="figura-resz" style="display: none;" />
+                <img id="elonezetFelsoTest_<%= ModuleId %>" src="/Portals/0/Images/testreszek/torso.jpg" alt="Felső Test" class="figura-resz" style="display: none;" />
+                <img id="elonezetFej_<%= ModuleId %>" src="/Portals/0/Images/testreszek/head.jpg" alt="Fej" class="figura-resz" style="display: none;" />
+                <img id="elonezetHajSapka_<%= ModuleId %>" src="/Portals/0/Images/testreszek/hair.jpg" alt="Haj/Sapka" class="figura-resz" style="display: none;" />
+                <img id="elonezetEszkoz_<%= ModuleId %>" src="/Portals/0/Images/testreszek/sword.jpg" alt="Eszköz" class="figura-resz" style="display: none;" />
+            </div>
+
+            <div class="ar-kijelzes">
+                <span>Összeállított figura ára: </span>
+                <strong id="figuraAr_<%= ModuleId %>">0 Ft</strong>
+            </div>
+
+            <div class="muvelet-gombok">
+                <button type="button" id="addToPreviewBtn_<%= ModuleId %>" class="dnnPrimaryAction">Hozzáadás</button>
+                <button type="button" id="resetBtn_<%= ModuleId %>" class="dnnPrimaryAction">Alaphelyzet</button>
+                <button type="button" id="addToCartBtn_<%= ModuleId %>" class="dnnPrimaryAction">Kosárba</button>
+            </div>
+
+            <div id="figuraKeszitoUzenet_<%= ModuleId %>" class="figura-uzenet" style="display: none;">
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Az összes kategória gomb lekérdezése
+        const add = document.getElementById("addToPreviewBtn_<%= ModuleId %>");
+        const buttons = document.querySelectorAll(".kategoria-gomb");
+        const reset = document.getElementById("resetBtn_<%= ModuleId %>");
+        
+        
+
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const targetPart = this.dataset.kategoria; // Melyik testrész változik
+
+                // Megkeressük az összes kép elemet és elrejtjük
+                document.querySelectorAll(".figura-resz").forEach(img => {
+                    img.style.display = "none";
+                });
+
+                // Csak a kiválasztott testrész képét jelenítjük meg
+                const figuraResz = document.getElementById(`elonezet${targetPart}_<%= ModuleId %>`);
+
+                if (figuraResz) {
+                    figuraResz.style.display = "block";
+                }
+            });
+        });
+        reset.addEventListener("click", function () {
+            // Megkeressük az összes kép elemet és elrejtjük
+            document.querySelectorAll(".figura-resz").forEach(img => {
+                img.style.display = "none";
+            });
+        });
+        add.addEventListener("click", function () {
+            
+        });
+    });
+
+</script>

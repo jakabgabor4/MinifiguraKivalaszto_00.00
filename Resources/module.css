@@ -1,0 +1,340 @@
+﻿:root {
+    --figura-bg-color: #f9f9f9; /* Modul háttérszíne */
+    --figura-panel-bg: #ffffff; /* Panelek háttérszíne */
+    --figura-border-color: #e0e0e0; /* Szegélyek színe */
+    --figura-primary-accent: #007bff; /* Elsődleges kiemelő szín (pl. gombok, aktív elemek) */
+    --figura-secondary-accent: #6c757d; /* Másodlagos szín (pl. reset gomb) */
+    --figura-hover-bg: #f1f1f1; /* Elemek háttérszíne hover esetén */
+    --figura-text-color: #333333; /* Alap szövegszín */
+    --figura-button-text: #ffffff; /* Gombok szövegszíne */
+    --figura-success-bg: #d4edda; /* Siker üzenet háttér */
+    --figura-success-text: #155724; /* Siker üzenet szöveg */
+    --figura-error-bg: #f8d7da; /* Hiba üzenet háttér */
+    --figura-error-text: #721c24; /* Hiba üzenet szöveg */
+}
+
+/* --- Modul Fő Konténere --- */
+.figura-keszito-modul {
+    font-family: Arial, Helvetica, sans-serif; 
+    color: var(--figura-text-color);
+    background-color: var(--figura-bg-color);
+    padding: 20px;
+    border: 1px solid var(--figura-border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* --- Fő Layout Konténer (Flexbox) --- */
+.figura-keszito-container {
+    display: flex;
+    flex-wrap: wrap; /* Tördelés kisebb képernyőn */
+    gap: 25px; /* Térköz a panelek között */
+}
+
+/* --- Bal Panel (Alkatrész Választó) --- */
+.panel-bal {
+    flex: 1; /* Elérhető hely kitöltése */
+    min-width: 220px; /* Minimális szélesség */
+    background-color: var(--figura-panel-bg);
+    border: 1px solid var(--figura-border-color);
+    border-radius: 4px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Címsor és lista egymás alatt */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+    .panel-bal h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--figura-border-color);
+        font-size: 1.2em;
+        text-align: center;
+        color: var(--figura-primary-accent);
+    }
+
+#figuraKeszitoPanel_<%= ModuleId %> {
+    padding: 15px;
+    border: 1px solid var(--figura-border-color, #e0e0e0);
+    background-color: var(--figura-panel-bg, #ffffff);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 10px;
+}
+
+    /* A panel fő címe */
+    .panel-bal-fo-cim {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--figura-border-color, #e0e0e0);
+        font-size: 1.2em;
+        text-align: center;
+        color: var(--figura-primary-accent, #007bff);
+        width: 100%;
+    }
+
+    /* Kategória szekciók stílusa */
+    .alkatresz-kategoria-szekcio {
+        width: 100%;
+        padding: 5px 10px; 
+        text-align: center;
+    }
+
+    /* Képek stílusa */
+    .figura-keszito-resz {
+        display: block;
+        width: 100px; 
+        height: 100px; 
+        object-fit: contain;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+/* --- Jobb Panel (Előnézet és Műveletek) --- */
+.panel-jobb {
+    flex: 2; 
+    min-width: 300px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 20px; 
+    padding: 15px;
+    
+}
+
+/* --- Kategória Választó Gombok --- */
+.kategoria-gombok {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px; 
+}
+
+.kategoria-gomb {
+    padding: 8px 15px;
+    border: 1px solid var(--figura-border-color);
+    background-color: var(--figura-panel-bg);
+    color: var(--figura-text-color);
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    font-size: 0.9em;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+    .kategoria-gomb:hover {
+        background-color: var(--figura-hover-bg);
+        border-color: #aaa;
+    }
+
+    /* Aktív kategória gomb stílusa (JS adja hozzá) */
+    .kategoria-gomb.active {
+        background-color: var(--figura-primary-accent);
+        color: var(--figura-button-text);
+        border-color: var(--figura-primary-accent);
+        font-weight: bold;
+    }
+
+/* --- Figura Előnézet Terület --- */
+.figura-elonezet {
+    position: relative; 
+    width: 200px; 
+    height: 280px; 
+    border: 1px solid var(--figura-border-color);
+    background-color: #fff; 
+    margin-bottom: 15px; 
+    overflow: hidden; 
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); 
+}
+
+    .figura-elonezet .figura-resz {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+        -moz-transition: inherit;
+        -o-transition: inherit;
+        -webkit-transition: inherit;
+        transition: inherit;
+        : opacity 0.3s ease; 
+    }
+
+/* --- Ár Kijelzés --- */
+.ar-kijelzes {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--figura-panel-bg);
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid var(--figura-border-color);
+    min-width: 150px;
+}
+
+    .ar-kijelzes strong {
+        color: var(--figura-primary-accent);
+        margin-left: 5px;
+    }
+
+/* --- Művelet Gombok (Kosárba, Alaphelyzet) --- */
+.muvelet-gombok {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+    .muvelet-gombok button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        min-width: 120px;
+    }
+
+       
+        .muvelet-gombok button.dnnPrimaryAction,
+        #addToCartBtn:not(.dnnPrimaryAction) { /* Kosárba gomb alap stílusa */
+            background-color: var(--figura-primary-accent);
+            color: var(--figura-button-text);
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+
+            .muvelet-gombok button.dnnPrimaryAction:hover,
+            #addToCartBtn:not(.dnnPrimaryAction):hover {
+                opacity: 0.9;
+                box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+            }
+
+#resetBtn { 
+    background-color: var(--figura-secondary-accent);
+    color: var(--figura-button-text);
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.3);
+}
+
+    #resetBtn:hover {
+        background-color: #5a6268;
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+    }
+
+/* --- Üzenet Terület --- */
+.figura-uzenet {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* Alapból rejtett */
+    box-sizing: border-box;
+}
+
+    .figura-uzenet.success { /* JS adja hozzá */
+        background-color: var(--figura-success-bg);
+        color: var(--figura-success-text);
+        border: 1px solid darken(var(--figura-success-bg), 10%);
+    }
+
+    .figura-uzenet.error { /* JS adja hozzá */
+        background-color: var(--figura-error-bg);
+        color: var(--figura-error-text);
+        border: 1px solid darken(var(--figura-error-bg), 10%);
+    }
+
+
+
+/* --- Reszponzív Design --- */
+
+
+/* Tablet méret (példa töréspont) */
+@media (max-width: 992px) {
+    .panel-bal {
+        min-width: 180px; /* Kisebb minimális szélesség */
+    }
+
+    .panel-jobb {
+        min-width: 250px;
+    }
+
+    .alkatresz-elem {
+        width: calc(50% - 10px); /* 2 elem egy sorban */
+    }
+
+    .figura-elonezet {
+        width: 180px;
+        height: 252px; /* Arányos csökkentés */
+    }
+}
+
+
+/* Mobil méret (példa töréspont) */
+@media (max-width: 767px) {
+    .figura-keszito-container {
+        flex-direction: column; /* Panelek egymás alá */
+        gap: 20px;
+    }
+
+    .panel-bal, .panel-jobb {
+        flex: none; /* Flex méretezés kikapcsolása */
+        width: 100%; /* Teljes szélesség */
+    }
+
+    .alkatresz-lista {
+        max-height: 250px; /* Magasság csökkentése mobilon */
+    }
+    
+
+    .figura-elonezet {
+        width: 160px;
+        height: 224px;
+        margin: 10px auto; /* Középre igazítás */
+    }
+
+    .muvelet-gombok {
+        flex-direction: column; /* Gombok egymás alá */
+        gap: 10px;
+    }
+
+        .muvelet-gombok button {
+            width: 100%; /* Teljes szélességű gombok */
+            padding: 10px; /* Kisebb padding mobilon */
+        }
+
+    .figura-keszito-modul {
+        padding: 15px; /* Kisebb padding */
+    }
+}
+
+/* Kisebb mobil méret */
+@media (max-width: 480px) {
+    .alkatresz-elem {
+        width: calc(50% - 8px); /* 2 elem egy sorban, kisebb réssel */
+        gap: 8px;
+    }
+
+        .alkatresz-elem img {
+            height: 50px;
+        }
+
+    .panel-bal, .panel-jobb, .figura-keszito-modul {
+        padding: 10px;
+    }
+
+    .kategoria-gomb {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+}
